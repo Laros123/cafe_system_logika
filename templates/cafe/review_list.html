@@ -1,0 +1,30 @@
+{% extends "cafe/base.html" %}
+{% block body %}
+{% if request.user.is_authenticated %}
+<h1>Create review</h1>
+<form action="{% url 'review_list' %}" method="POST">
+    {% csrf_token %}
+    <div>
+        <label for="title">Title: </label>
+        <input type='text' id="title" name="title">
+    </div>
+    <br>
+    <div>
+        <label for="context">Context: </label>
+        <input type='text' id="content" name="content">
+    </div>
+    <br>
+    <button type="submit">Submit</button>
+
+<h1>Reviews</h1>
+</form>
+{% endif %}
+
+{% for review in reviews %}
+<h2>{{ review.title }}</h2>
+<h3>{{ review.content }}</h4>
+<h4>{{ review.author }}</h4>
+<h4>{{ review.pub_date }}</h4>
+<br>
+{% endfor %}
+{% endblock %}
